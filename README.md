@@ -57,6 +57,7 @@ Options
 -------
 
 * `--unknown` to only show licenses that it can't determine or guess at (from README)
+* `--depth` limit traversal depth. `--depth=0` is current package deps only.
 * `--json` output in json format.
 * `--csv` output in csv format.
 * `--out [filepath]` write the data to a specific file.
@@ -68,6 +69,7 @@ Examples
 license-checker --json > /path/to/licenses.json
 license-checker --csv --out /path/to/licenses.csv
 license-checker --unknown
+license-checker --depth
 ```
 
 Requiring

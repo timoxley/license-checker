@@ -52,6 +52,30 @@ var tests = {
                 assert.isTrue(Object.keys(d).length > 20);
             }
         }
+        'should limit traversal depth with --depth flag': {
+            topic: function () {
+                var self = this;
+
+                checker.init({
+                    start: path.join(__dirname, '../'),
+                    depth: 0
+                }, function (sorted) {
+                    self.callback(null, sorted);
+                });
+            },
+            'and give us results': function (d) {
+                var pkg = require(__dirname + '/../package.json')
+                assert.ok(d);
+                assert.ok(d['vows@0.8.0'], 'failed to lookup vows dep');
+                assert.equal(d['vows@0.8.0'].licenses, 'MIT');
+                assert.equal(
+                    Object.keys(d).length,
+                    Object.keys(pkg.dependencies).length +
+                    Object.keys(pkg.devDependencies).length +
+                    1 // + self
+                );
+            }
+        }
     },
     'should not error': {
         topic: function () {
